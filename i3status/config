@@ -1,0 +1,44 @@
+general {
+	output_format="i3bar"
+	colors=true
+	interval=5
+	
+}
+
+order += "disk /"
+order += "memory"
+order += "wireless wlan0"
+order += "ethernet eth0"
+order += "tztime local"
+
+# free_disk
+disk "/" {
+	format = "%avail of %total"
+}
+
+# cpu
+cpu_temperature 0 {
+	format = "T: %degrees C"
+	path = "/sys/devices/platform/coretemp.0/temp1_input"
+}
+
+# memory
+memory{
+	format = "%used of %total"
+	threshold_degraded = "10%"
+	format_degraded = "MEMORY: %free"
+}
+# local time
+tztime local{
+	format = "%d/%m %H:%M"
+	timezone = "Asia/Kolkata"
+}
+ethernet eth0 {
+	format_up = "E: %ip (%speed)"
+	format_down = "E: down"
+}
+wireless wlan0{
+	format_up = "W: (%quality at %essid) %ip"
+	format_down = "W: down"
+
+}
